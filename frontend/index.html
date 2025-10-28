@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Counter</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial;
+      background: #f0f0f0;
+    }
+    h1 {
+      font-size: 80px;
+      margin: 20px;
+      color: #333;
+    }
+    button {
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="count">0</h1>
+  <button onclick="clickButton()">클릭!</button>
+
+  <script>
+    async function clickButton() {
+      const res = await fetch('http://localhost:4000/click', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('count').innerText = data.count;
+    }
+  </script>
+</body>
+</html>
