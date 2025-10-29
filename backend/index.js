@@ -33,4 +33,11 @@ app.post('/click', async (req, res) => {
   res.json({ count: rows[0].value });
 });
 
+// 버튼 숫자 감소값 프론트엔드로 json으로 내용전달
+app.post('/decrease', async (req, res) => {
+  await db.query('UPDATE counter SET value = value - 1');
+  const [rows] = await db.query('SELECT value FROM counter');
+  res.json({ count: rows[0].value });
+});
+
 app.listen(4000, () => console.log('백엔드 4000포트 실행'));

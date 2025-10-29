@@ -30,15 +30,34 @@
     button:hover {
       background: #45a049;
     }
+    .button-container {
+      display: flex;
+      gap: 15px;
+    }
+    .decrease-btn {
+      background: #f44336;
+    }
+    .decrease-btn:hover {
+      background: #da190b;
+    }
   </style>
 </head>
 <body>
   <h1 id="count">0</h1>
-  <button onclick="clickButton()">클릭!</button>
+  <div class="button-container">
+    <button onclick="clickButton()">증가</button>
+    <button class="decrease-btn" onclick="decreaseButton()">감소</button>
+  </div>
 
   <script>
     async function clickButton() {
       const res = await fetch('http://localhost:4000/click', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('count').innerText = data.count;
+    }
+
+    async function decreaseButton() {
+      const res = await fetch('http://localhost:4000/decrease', { method: 'POST' });
       const data = await res.json();
       document.getElementById('count').innerText = data.count;
     }
