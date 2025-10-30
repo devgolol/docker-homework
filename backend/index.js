@@ -24,7 +24,6 @@ async function connectDB() {
     setTimeout(connectDB, 3000);
   }
 }
-connectDB();
 
 // 버튼 숫자 상승값 프론트엔드로 json으로 내용전달
 app.post('/click', async (req, res) => {
@@ -40,4 +39,6 @@ app.post('/decrease', async (req, res) => {
   res.json({ count: rows[0].value });
 });
 
-app.listen(4000, () => console.log('백엔드 4000포트 실행'));
+connectDB().then(() =>{
+  app.listen(4000, () => console.log('백엔드 4000포트 실행'));
+})
