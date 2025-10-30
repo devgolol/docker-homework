@@ -29,14 +29,14 @@ connectDB();
 // 버튼 숫자 상승값 프론트엔드로 json으로 내용전달
 app.post('/click', async (req, res) => {
   await mydb.query('UPDATE counter SET value = value + 1');
-  const [rows] = await db.query('SELECT value FROM counter');
+  const [rows] = await mydb.query('SELECT value FROM counter');
   res.json({ count: rows[0].value });
 });
 
 // 버튼 숫자 감소값 프론트엔드로 json으로 내용전달
 app.post('/decrease', async (req, res) => {
   await mydb.query('UPDATE counter SET value = value - 1');
-  const [rows] = await db.query('SELECT value FROM counter');
+  const [rows] = await mydb.query('SELECT value FROM counter');
   res.json({ count: rows[0].value });
 });
 
