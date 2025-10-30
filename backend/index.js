@@ -19,9 +19,11 @@ async function connectDB() {
     await mydb.query('CREATE TABLE IF NOT EXISTS counter (value INT)');
     await mydb.query('INSERT INTO counter SELECT 0 WHERE NOT EXISTS (SELECT * FROM counter)'); //테이블 아무것도 없을시 0 넣기
     console.log('DB 연결 완료');
+    return true;
   } catch (err) {
     console.log('DB 연결 재시도...');
-    setTimeout(connectDB, 3000);
+    await new Promise(resolve => setTimeout(resolve,3000))
+    return connectDB();
   }
 }
 
